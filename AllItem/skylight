@@ -1,0 +1,33 @@
+            local LocalPlayer = game.Players.LocalPlayer
+            local UI = LocalPlayer.PlayerGui.ScreenGui
+            if UI.inv.sectionframes:GetChildren()[2]:FindFirstChild("GridOrder") then
+            local invbut = game.ReplicatedStorage.model.invbut:Clone()
+            local CurrentImage = 1
+            local Images =  {15853849163,15853849428,15853849758,15853850018,15853850210,15853850416,15853850814,15853851225,15853851456,15853851743,15853851992,15853853280,15853853633,15853853973,15853854263,15853854481,15853854905,15853855205,15853855461,15853863936,15853864303,15853864552}
+            task.spawn(function()
+                while true do
+                    wait()
+                    if CurrentImage > #Images or CurrentImage == #Images then
+                        CurrentImage = 0
+                    end
+                    CurrentImage = CurrentImage + 1
+                    invbut.Image = "https://www.roblox.com/Thumbs/Asset.ashx?width=100&height=100&assetId=" .. Images[CurrentImage]
+                end
+            end)
+            invbut.name.Text = "Skylight"
+            invbut.type.Text = "Divine"
+            invbut.type.TextColor3 = Color3.fromRGB(255, 204, 0)
+            invbut.Parent = UI.inv.sectionframes:GetChildren()[2]
+            invbut.MouseButton1Down:Connect(function()
+                if invbut.BorderSizePixel == 0 then
+                invbut.BorderSizePixel = 2
+            for i,v in pairs(UI.inv.sectionframes:GetChildren()[2].GridOrder:GetChildren()) do
+                if v ~= invbut and v:IsA("ImageButton") then
+                    v.BorderSizePixel = 0
+                end
+            end
+            else
+                invbut.BorderSizePixel = 0
+            end
+            end)
+        end
