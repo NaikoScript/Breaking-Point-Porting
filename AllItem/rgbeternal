@@ -1,0 +1,33 @@
+            local LocalPlayer = game.Players.LocalPlayer
+local UI = LocalPlayer.PlayerGui.ScreenGui
+        if UI.inv.sectionframes:GetChildren()[2]:FindFirstChild("GridOrder") then
+            local invbut = game.ReplicatedStorage.model.invbut:Clone()
+            local CurrentImage = 1
+            local Images = {16117965500,16117965674,16117965880,16117966133,16117966449,16117966696,16117966985,16117967193,16117967424,16117967699,16117968019,16117968268,16117968521,16117968811,16117969117,16117969756,16117970036,16117970320,16117970613,16117971303,16117971542,16117972165}
+            task.spawn(function()
+                while true do
+                    wait()
+                    if CurrentImage > #Images or CurrentImage == #Images then
+                        CurrentImage = 0
+                    end
+                    CurrentImage = CurrentImage + 1
+                    invbut.Image = "https://www.roblox.com/Thumbs/Asset.ashx?width=100&height=100&assetId=" .. Images[CurrentImage]
+                end
+            end)
+            invbut.name.Text = "RGB Eternal"
+            invbut.type.Text = "Divine"
+            invbut.type.TextColor3 = Color3.fromRGB(255, 204, 0)
+            invbut.Parent = UI.inv.sectionframes:GetChildren()[2]
+            invbut.MouseButton1Down:Connect(function()
+                if invbut.BorderSizePixel == 0 then
+                invbut.BorderSizePixel = 2
+            for i,v in pairs(UI.inv.sectionframes:GetChildren()[2].GridOrder:GetChildren()) do
+                if v ~= invbut and v:IsA("ImageButton") then
+                    v.BorderSizePixel = 0
+                end
+            end
+            else
+                invbut.BorderSizePixel = 0
+            end
+            end)
+        end
