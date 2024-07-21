@@ -1,0 +1,38 @@
+            local LocalPlayer = game.Players.LocalPlayer
+local UI = LocalPlayer.PlayerGui.ScreenGui
+        if UI.inv.sectionframes:GetChildren()[2]:FindFirstChild("GridOrder") then
+            local invbut = game.ReplicatedStorage.model.invbut:Clone()
+            local CurrentImage = 1
+            local Images = {18594714382,18594713723,18594713063,18594712219,18594711085,18594710344,18594709702,18594709147,18594708522,18594707768,18594706885,18594705956,18594717380,18594704569,18594704031,18594703413,18594702614,18594701931,18594700991,18594700406,18594699896,18594698740,18594698176,18594697460,18594696695,18594696034,18594695337,18594694648,18594693952,18594693353,18594692876,18594692155,18594691598,18594690881,18594690467,18594689971,18594689285,18594688622,18594687893,18594686956,18594685971,18594685269,18594684717,18594684096,18594683650,18594683253,18594682811,18594682225,18594681748,18594681306,18594680800,18594680140,18594679541,18594679089,18594678635,18594678179,18594677565,18594676992,18594676401,18594675878,18594674981,18594674191,18594673717,18594672975,18594672206,18594671551,18594671075,18594670682,18594670180,18594669796,18594669279,18594668754,18594668298,18594667772,18594667262,18594666751,18594666180,18594665633}
+  local assetimage = {}
+  for i,v in pairs(Images) do
+	  table.insert(assetimage,"rbxassetid://" .. v)
+  end
+  game:GetService("ContentProvider"):PreloadAsync(assetimage)
+            task.spawn(function()
+                while true do
+                    wait()
+                    if CurrentImage > #Images or CurrentImage == #Images then
+                        CurrentImage = 0
+                    end
+                    CurrentImage = CurrentImage + 1
+                    invbut.Image = "https://www.roblox.com/Thumbs/Asset.ashx?width=100&height=100&assetId=" .. Images[CurrentImage]
+                end
+            end)
+            invbut.name.Text = "Wired"
+            invbut.type.Text = "Divine"
+            invbut.type.TextColor3 = Color3.fromRGB(255, 204, 0)
+            invbut.Parent = UI.inv.sectionframes:GetChildren()[2]
+            invbut.MouseButton1Down:Connect(function()
+                if invbut.BorderSizePixel == 0 then
+                invbut.BorderSizePixel = 2
+            for i,v in pairs(UI.inv.sectionframes:GetChildren()[2].GridOrder:GetChildren()) do
+                if v ~= invbut and v:IsA("ImageButton") then
+                    v.BorderSizePixel = 0
+                end
+            end
+            else
+                invbut.BorderSizePixel = 0
+            end
+            end)
+        end
