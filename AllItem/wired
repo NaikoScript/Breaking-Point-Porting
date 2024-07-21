@@ -8,7 +8,9 @@ local UI = LocalPlayer.PlayerGui.ScreenGui
   for i,v in pairs(Images) do
 	  table.insert(assetimage,"rbxassetid://" .. v)
   end
+  task.spawn(function()
   game:GetService("ContentProvider"):PreloadAsync(assetimage)
+		end)
             task.spawn(function()
                 while true do
                     wait()
