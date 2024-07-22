@@ -1,0 +1,53 @@
+            local LocalPlayer = game.Players.LocalPlayer
+local UI = LocalPlayer.PlayerGui.ScreenGui
+        if UI.inv.sectionframes:GetChildren()[1]:FindFirstChild("GridOrder") then
+            local invbut = game.ReplicatedStorage.model.invbut:Clone()
+            local CurrentImage = 1
+            local Images =  {
+  18605342879,
+  18605341953,
+  18605341505,
+  18605341021,
+  18605340607,
+  18605340170,
+  18605339666,
+  18605338950,
+  18605338468,
+  18605338042,
+  18605337382,
+  18605336862,
+  18605336401,
+  18605335698,
+  18605334986
+  }
+  local assetimage = {}
+  for i,v in pairs(Images) do
+	  table.insert(assetimage,"rbxassetid://" .. v)
+  end
+            task.spawn(function()
+                while true do
+                    wait()
+                    if CurrentImage > #Images or CurrentImage == #Images then
+                        CurrentImage = 0
+                    end
+                    CurrentImage = CurrentImage + 1
+                    invbut.Image = "https://www.roblox.com/Thumbs/Asset.ashx?width=100&height=100&assetId=" .. Images[CurrentImage]
+                end
+            end)
+            invbut.name.Text = "Pointlight"
+            invbut.type.Text = "Divine"
+            invbut.type.TextColor3 = Color3.fromRGB(255, 204, 0)
+            invbut.Parent = UI.inv.sectionframes:GetChildren()[1]
+            invbut.MouseButton1Down:Connect(function()
+                if invbut.BorderSizePixel == 0 then
+                invbut.BorderSizePixel = 2
+            for i,v in pairs(UI.inv.sectionframes:GetChildren()[1].GridOrder:GetChildren()) do
+                if v ~= invbut and v:IsA("ImageButton") then
+                    v.BorderSizePixel = 0
+                end
+            end
+            else
+                invbut.BorderSizePixel = 0
+            end
+            end)
+        end
