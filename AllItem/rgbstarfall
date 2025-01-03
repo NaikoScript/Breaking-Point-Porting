@@ -31,7 +31,7 @@ if UI.inv.sectionframes:GetChildren()[SkinType]:FindFirstChild("GridOrder") then
     invbut.type.Text = Rarity
     invbut.type.TextColor3 = Rarities[Rarity]
     invbut.LayoutOrder = RarityOrder[Rarity]
-    if Rarity == "Exotic" then
+    if RarityOrder[Rarity] < -5 then
         invbut.ZIndex = 2
         invbut.type.ZIndex = 2
         invbut.name.ZIndex = 2
@@ -40,7 +40,7 @@ if UI.inv.sectionframes:GetChildren()[SkinType]:FindFirstChild("GridOrder") then
         ButtonRe.Size = UDim2.new(1,0,1,0)
         ButtonRe.Position = UDim2.new(0.5,0,0.5,0)
         ButtonRe.Image = "rbxassetid://1401978119"
-        ButtonRe.ImageColor3 = Color3.fromRGB(255, 129, 59)
+        ButtonRe.ImageColor3 = Rarities[Rarity]
         ButtonRe.ImageTransparency = 0.525
         ButtonRe.AnchorPoint = Vector2.new(0.5,0.5)
         ButtonRe.BackgroundTransparency = 0.3
