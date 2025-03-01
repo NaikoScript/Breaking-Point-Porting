@@ -17,7 +17,9 @@ local response = request(abcdef)
 if response.StatusCode == 200 then
     local content = HttpService:JSONDecode(response.Body)
     for i, item in pairs(content) do
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/NaikoScript/Breaking-Point-Porting/main/AllItem/"..item.name))() 
+        task.spawn(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/NaikoScript/Breaking-Point-Porting/main/AllItem/"..item.name))()
+        end)
     end
 else
     error("Failed to get the items. Status code: " .. response.StatusCode)
