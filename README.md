@@ -1,7 +1,7 @@
 # Breaking Point Porting
 ### How to use this?  
 **1)** execute **[breaking plus](https://github.com/NaikoScript/Breaking-Plus)**  
-**2)** run one of the scripts within one of the item folders
+**2)** run one of the scripts within one of the item folders or the one below
 
 > [!WARNING]
 > **THIS IS VISUAL SO ONLY YOU WILL BE ABLE TO SEE IT AND ONCE YOU REJOIN THEY WILL BE GONE**
