@@ -1,0 +1,176 @@
+-- Main Variables --
+local LocalPlayer = game.Players.LocalPlayer
+local UI = LocalPlayer.PlayerGui.ScreenGui or LocalPlayer.PlayerGui:WaitForChild('ScreenGui')
+local SkinTypes = {Guns=1,Knifes=2,Chairs=3,Animations=4,Accessories=5,Effects=6}
+local Rarities = {Common=Color3.fromRGB(255, 255, 255),Uncommon=Color3.fromRGB(255, 245, 184),Rare=Color3.fromRGB(25, 255, 190),Legendary=Color3.fromRGB(255, 79, 82),Divine=Color3.fromRGB(255, 204, 0),Exotic=Color3.fromRGB(255, 129, 59)}
+local RarityOrder = {Exotic=-6,Divine = -5,Legendary = -4,Rare = -3,Uncommon = -2,Common = -1}
+
+-- Configuration --
+local SkinType = SkinTypes["Chairs"] -- Where it would be located in your inventory [Guns, Knifes, Chairs, Animations, Accessories, Effects]
+local SkinName = "Flames" -- Name of the skin
+local Rarity = "Divine" -- The rarity of the skin [Common, Uncommon, Rare, Legendary, Divine, Exotic]
+local SwapTheSkinLocally = true -- Determines if the skin will be swapped on your knife when you hold it or on your table
+
+-- Image data --
+local Images = {13864162831,13864168118,13864170725,13864174464,13864175646,13864177032,13864178599,13864179974,13864181340,13864182997,13864184258,13864185622,13864186880,13864188245,13864189680,13864191319,13864192651,13864193671,13864194594,13864195706,13864196946,13864198087,13864199224,13864206716,13864207806,13864209032,13864210355,13864211654,13864212718,13864213815,13864214706,13864216137,13864217477,13864218674,13864219647,13864220709}
+local Data = {13864085087,13864084803,13864084595,13864084414,13864084267,13864084076,13864083752,13864083551,13864083379,13864083155,13864080483,13864080383,13864080261,13864080049,13864079793,13864079535,13864079347,13864079147,13864078994,13864078839,13864078561,13864078384,13864078212,13864078014,13864077798,13864077679,13864077484,13864077304,13864077129,13864076935,13864076776,13864076636,13864076397,13864076205,13864076069,13864075702}
+
+-- Source code --
+if UI.inv.sectionframes:GetChildren()[SkinType]:FindFirstChild("GridOrder") then
+    if SwapTheSkinLocally == true then
+        task.spawn(function()
+        for i,v in Data do
+            game:GetService("ContentProvider"):PreloadAsync({"rbxassetid://"..v})
+        end
+        end)
+    end
+    if #Images == 1 then
+        table.insert(Images,Images[1])
+    end
+    if #Data == 1 then
+        table.insert(Data,Data[1])
+    end
+    local invbut = game.ReplicatedStorage.model.invbut:Clone()
+    local SkinWrap = false
+    local CurrentImage,CurrentImage2 = 1,1
+    local Connection
+    task.spawn(function()
+        while true do
+            wait()
+            if CurrentImage > #Images or CurrentImage == #Images then
+                CurrentImage = 0
+            end
+            if CurrentImage2 > #Data or CurrentImage2 == #Data then
+                CurrentImage2 = 0
+            end
+            CurrentImage += 1
+            CurrentImage2 += 1
+            invbut.Image = "https://www.roblox.com/Thumbs/Asset.ashx?width=100&height=100&assetId=" .. Images[CurrentImage]
+            if SkinWrap == true and SwapTheSkinLocally == true then
+                if SkinType == 1 then
+                    if LocalPlayer.Character ~= nil and LocalPlayer.Character:FindFirstChild("display_gun") then
+                        LocalPlayer.Character:FindFirstChild("display_gun").TextureID = "https://www.roblox.com/Thumbs/Asset.ashx?width=100&height=100&assetId=" .. Data[CurrentImage2]
+                        if Connection == nil then
+                            Connection = LocalPlayer.Character:FindFirstChild("display_gun"):GetPropertyChangedSignal("TextureID"):Once(function()
+                                LocalPlayer.Character:FindFirstChild("display_gun").TextureID = "https://www.roblox.com/Thumbs/Asset.ashx?width=100&height=100&assetId=" .. Data[CurrentImage2]
+                                Connection = nil
+                            end)
+                            task.spawn(function()
+                                wait()
+                                Connection = nil
+                            end)
+                        end
+                    end    
+                elseif SkinType == 2 then
+                if LocalPlayer.Character ~= nil and LocalPlayer.Character:FindFirstChild("display_blade") and LocalPlayer.Character:FindFirstChild("display_blade"):FindFirstChildOfClass("SpecialMesh") then
+                    LocalPlayer.Character:FindFirstChild("display_blade"):FindFirstChildOfClass("SpecialMesh").TextureId = "https://www.roblox.com/Thumbs/Asset.ashx?width=100&height=100&assetId=" .. Data[CurrentImage2]
+                    if Connection == nil then
+                        Connection = LocalPlayer.Character:FindFirstChild("display_blade"):FindFirstChildOfClass("SpecialMesh"):GetPropertyChangedSignal("TextureId"):Once(function()
+                            LocalPlayer.Character:FindFirstChild("display_blade"):FindFirstChildOfClass("SpecialMesh").TextureId = "https://www.roblox.com/Thumbs/Asset.ashx?width=100&height=100&assetId=" .. Data[CurrentImage2]
+                            Connection = nil
+                        end)
+                        task.spawn(function()
+                            wait()
+                            Connection = nil
+                        end)
+                    end
+                end
+                if LocalPlayer.Character ~= nil and LocalPlayer.Character:FindFirstChildOfClass("Tool") and LocalPlayer.Character:FindFirstChildOfClass("Tool").Name == "Blade" and LocalPlayer.Character:FindFirstChildOfClass("Tool"):FindFirstChild("Handle") and LocalPlayer.Character:FindFirstChildOfClass("Tool"):FindFirstChild("Handle"):FindFirstChildOfClass("SpecialMesh") then
+                    LocalPlayer.Character:FindFirstChildOfClass("Tool"):FindFirstChild("Handle"):FindFirstChildOfClass("SpecialMesh").TextureId = "https://www.roblox.com/Thumbs/Asset.ashx?width=100&height=100&assetId=" .. Data[CurrentImage2]
+                    if Connection == nil then
+                        Connection = LocalPlayer.Character:FindFirstChildOfClass("Tool"):FindFirstChild("Handle"):FindFirstChildOfClass("SpecialMesh"):GetPropertyChangedSignal("TextureId"):Once(function()
+                            LocalPlayer.Character:FindFirstChildOfClass("Tool"):FindFirstChild("Handle"):FindFirstChildOfClass("SpecialMesh").TextureId = "https://www.roblox.com/Thumbs/Asset.ashx?width=100&height=100&assetId=" .. Data[CurrentImage2]
+                            Connection = nil
+                        end)
+                        task.spawn(function()
+                            wait()
+                            Connection = nil
+                        end)
+                    end
+                end
+                elseif SkinType == 3 then
+                    if workspace:FindFirstChild("chairs") then
+                for i,v in workspace:FindFirstChild("chairs"):GetChildren() do
+                    if v:FindFirstChild("Value") and v.Value.Value == LocalPlayer.Name and v:FindFirstChild("MeshChair") and v:FindFirstChild("MeshChair"):FindFirstChildOfClass("SpecialMesh") then
+                        v:FindFirstChild("MeshChair"):FindFirstChildOfClass("SpecialMesh").TextureId = "https://www.roblox.com/Thumbs/Asset.ashx?width=100&height=100&assetId=" .. Data[CurrentImage2]
+                        v:FindFirstChild("MeshChair"):FindFirstChildOfClass("SpecialMesh").VertexColor = Vector3.new(1.65,1.65,1.65)
+                        if Connection == nil then
+                            Connection = v:FindFirstChild("MeshChair"):FindFirstChildOfClass("SpecialMesh"):GetPropertyChangedSignal("TextureId"):Once(function()
+                                v:FindFirstChild("MeshChair"):FindFirstChildOfClass("SpecialMesh").TextureId = "https://www.roblox.com/Thumbs/Asset.ashx?width=100&height=100&assetId=" .. Data[CurrentImage2]
+                                Connection = nil
+                            end)
+                            task.spawn(function()
+                                wait()
+                                Connection = nil
+                            end)
+                        end
+                    end
+                    if v:FindFirstChild("Value") and v.Value.Value == LocalPlayer.Name and v:FindFirstChild("skinchair") then
+                        v:FindFirstChild("skinchair").TextureID = "https://www.roblox.com/Thumbs/Asset.ashx?width=100&height=100&assetId=" .. Data[CurrentImage2]
+                        if Connection == nil then
+                            Connection = v:FindFirstChild("skinchair"):GetPropertyChangedSignal("TextureID"):Once(function()
+                                v:FindFirstChild("skinchair").TextureID = "https://www.roblox.com/Thumbs/Asset.ashx?width=100&height=100&assetId=" .. Data[CurrentImage2]
+                                Connection = nil
+                            end)
+                            task.spawn(function()
+                                wait()
+                                Connection = nil
+                            end)
+                        end
+                    end
+                end
+                end
+            end
+            end
+        end
+    end)
+    invbut.name.Text = SkinName
+    invbut.type.Text = Rarity
+    invbut.type.TextColor3 = Rarities[Rarity]
+    invbut.LayoutOrder = RarityOrder[Rarity]
+    if RarityOrder[Rarity] < -5 then
+        invbut.ZIndex = 2
+        invbut.type.ZIndex = 2
+        invbut.name.ZIndex = 2
+        invbut.BackgroundTransparency = 1
+        local ButtonRe = Instance.new("ImageButton")
+        ButtonRe.Size = UDim2.new(1,0,1,0)
+        ButtonRe.Position = UDim2.new(0.5,0,0.5,0)
+        ButtonRe.Image = "rbxassetid://1401978119"
+        ButtonRe.ImageColor3 = Rarities[Rarity]
+        ButtonRe.ImageTransparency = 0.525
+        ButtonRe.AnchorPoint = Vector2.new(0.5,0.5)
+        ButtonRe.BackgroundTransparency = 0.3
+        ButtonRe.BackgroundColor3 = Color3.fromRGB(40,40,40)
+        ButtonRe.ScaleType = Enum.ScaleType.Tile
+        ButtonRe.TileSize = UDim2.new(3.5,0,0.4,0)
+        ButtonRe.ZIndex = 1
+        ButtonRe.Parent = invbut
+        ButtonRe.BorderSizePixel = invbut.BorderSizePixel
+        ButtonRe.BorderColor3 = Color3.fromRGB(255, 237, 93)
+        invbut:GetPropertyChangedSignal("BorderSizePixel"):Connect(function()
+        ButtonRe.BorderSizePixel = invbut.BorderSizePixel
+        end)
+    end
+    invbut:GetPropertyChangedSignal("BorderSizePixel"):Connect(function()
+        if invbut.BorderSizePixel == 0 then
+            SkinWrap = false
+        end
+    end)
+    invbut.Parent = UI.inv.sectionframes:GetChildren()[SkinType]
+    invbut.MouseButton1Down:Connect(function()
+        if invbut.BorderSizePixel == 0 then
+            invbut.BorderSizePixel = 2
+            SkinWrap = true
+        for i,v in pairs(UI.inv.sectionframes:GetChildren()[SkinType].GridOrder:GetChildren()) do
+            if v ~= invbut and v:IsA("ImageButton") then
+                v.BorderSizePixel = 0
+            end
+        end
+            else
+                invbut.BorderSizePixel = 0
+            end
+            end)
+        else
+            error("Could not find grid order. Did you forget to run breaking plus?")
+        end
