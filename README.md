@@ -6,7 +6,7 @@
 > [!WARNING]
 > **THIS IS VISUAL SO ONLY YOU WILL BE ABLE TO SEE IT AND ONCE YOU REJOIN THEY WILL BE GONE**
 
-## Get every item script
+# Get every item script
 ```lua
 local request = http_request or request or HttpPost
 local HttpService = game:GetService("HttpService")
@@ -26,5 +26,6 @@ end
 ```
 
 ## Update Changelogs
-**1)** Now you will be able to equip the skins and see them in game  
-**2)** Code readability is way better
+**1)** A lot of new items  
+**2)** Instead of allitempreviews its now formatted base on the item  
+**3)** Duplicate items will have their item type on the right of their name (ex. Red Gun,Red Knife) (NOT IN GAME)  
