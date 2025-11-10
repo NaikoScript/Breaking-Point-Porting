@@ -132,7 +132,299 @@ end,
         tween2(u92, "Transparency", 1, 0.5)
         wait(1)
         u92:Destroy()
-    end
+    end,
+    ["Mellow"] = function(Character)
+        if not Character.Parent then return end
+        local table24 = {}
+        local u91 = table2.get("radiant2c")
+        u91.Color = Color3.fromRGB(193, 132, 134)
+        pcall(function()
+            local u147 = CFrame.new(Character.Torso.Position.X, 0, Character.Torso.Position.Z) * CFrame.Angles(0, 0, 1.5707963267948966)
+            u91.CFrame = CFrame.new(Character.Torso.Position.X, 0, Character.Torso.Position.Z) * CFrame.Angles(0, 0, 1.5707963267948966)
+            u91.Parent = workspace
+            u91.ParticleEmitter:Emit()
+            tween2(u91, "Transparency", 0, 0.3)
+            tween2(u91, "Size", Vector3.new(30, 5, 5), 1)
+            tween2(u91, "CFrame", CFrame.new(Character.Torso.Position.X, 15, Character.Torso.Position.Z) * CFrame.Angles(0, 0, 1.5707963267948966), 1)
+            spawn(function()
+                for index62 = 1, 5 do
+                    local u184 = table2.get("cane")
+                    u184.CFrame = CFrame.new(Character.Torso.Position.X, 0, Character.Torso.Position.Z) * CFrame.Angles(0, 0, 1.8325957145940461)
+                    u184.Size = Vector3.new(2.014, 8, 8)
+                    u184.Parent = workspace
+                    delay(0.1, function()
+                    end)
+                    spawn(function()
+                        local cf = CFrame.new(Character.Torso.Position.X, 0, Character.Torso.Position.Z)
+                        for index75 = 0, 360, 60 do
+                            tween2(u184, "CFrame", cf * CFrame.new(0, (index62 - 1) * 4, 0) * CFrame.Angles(0, math.rad(index75), 1.8325957145940461), 0.5)
+                            wait()
+                        end
+                    end)
+                    tween2(u184, "Color", Color3.fromRGB(255, 0, 0), 2)
+                    table24[#table24 + 1] = u184
+                end
+            end)
+            delay(0.1, function()
+                for index63 = 0, 360, 180 do
+                    delay(index63 / 180 * 0.1, function()
+                        local u189 = table2.get("radtrailc")
+                        u189.CFrame = CFrame.new(u147.p) * CFrame.Angles(0, math.rad(index63), 0) * CFrame.new(0.4, index63 / 180 * 3 + 0, 0)
+                        u189.Parent = workspace
+                        for _, child213 in pairs(u189:GetChildren()) do
+                            if child213.Name ~= "Trail" then continue end
+                            child213.Enabled = true
+                        end
+                        tween2(u189, "CFrame", u189.CFrame * CFrame.new(0, 10, 0), 1)
+                        delay(1, function()
+                            u189:Destroy()
+                        end)
+                    end)
+                end
+            end)
+        end)
+        wait()
+        wait()
+        wait(0.05)
+        for _, val12 in pairs(table24) do
+            delay(0.15, function()
+                tween2(val12, "Transparency", 1, 1)
+                wait(0.08)
+                val12.ParticleEmitter2:Emit()
+            end)
+            tween2(val12, "Size", Vector3.new(0, 0, 0), 0.4, nil, Enum.EasingDirection.InOut)
+        end
+        tween2(u91, "CFrame", CFrame.new(Character.Torso.Position.X, 10, Character.Torso.Position.Z) * CFrame.Angles(0, 0, 1.5707963267948966), 1.5)
+        Character:Destroy()
+        tween2(u91, "Size", Vector3.new(30, 0, 0), 0.4, nil, Enum.EasingDirection.InOut)
+        delay(0.15, function()
+            tween2(u91, "Transparency", 1, 1)
+        end)
+        wait(3)
+        for _, val13 in pairs(table24) do
+            val13:Destroy()
+        end
+        u91:Destroy()
+    end,
+    ["Infinite"] = function(Character)
+        for i, y in pairs(Character:GetChildren()) do
+            if y:IsA("BasePart") then
+                if y.Name == "Head" then
+                    y:FindFirstChildWhichIsA("Decal"):Destroy()
+                end
+                y.Anchored = true
+                y.CanCollide = false
+                local Smoke = table2.get("fin")
+                Smoke.Parent = y
+                Smoke.fin:Emit(256)
+                coroutine.resume(coroutine.create(function()
+                    for i = 0,1,0.05 do
+                        wait()
+                        y.Transparency = i
+                    end
+                    Smoke.Enabled = false
+                    wait(4)
+                    Smoke:Destroy()
+                end))
+            end
+            if y:IsA("Tool") or y:IsA("Accessory") then
+                y:Destroy()
+            end
+	    end
+    end,
+    ["Jade"] = function(Character)
+        for i, y in pairs(Character:GetChildren()) do
+            if y:IsA("Tool") then
+                y:Destroy()
+            end
+	    end
+        local Fire = table2.get("jadefx")
+        Fire.Parent = Character:FindFirstChild("Torso") or Character:WaitForChild("Torso")
+        for i = Fire.Range, 0, -1 do
+            wait()
+            Fire.Range = i
+        end
+        wait(1)
+        Fire:Destroy()
+    end,
+    ["Azure"] = function(Character)
+        local Torso = Character:FindFirstChild("Torso") or Character:WaitForChild("Torso")
+        for i, y in pairs(Character:GetChildren()) do
+            if y:IsA("Tool") then
+                y:Destroy()
+            end
+	    end
+
+        local parts = {}
+        local colors = {Color3.fromRGB(0,200,255),Color3.fromRGB(0,130,175),Color3.fromRGB(0,25,145)}
+        for i = 1, 10 do
+            local clone = table2.get("azurefx")
+            local sizerand = math.random(4, 6)/10
+            clone.Parent = Torso
+            clone.Anchored = false
+            clone.CanCollide = false
+            clone.Size = Vector3.new(sizerand,sizerand,sizerand)
+            clone.Color = colors[math.random(1, #colors)]
+            table.insert(parts, clone)
+            spawn(function()
+                wait(1)
+                local tween = game:GetService("TweenService"):Create(clone, TweenInfo.new(0.5, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Transparency = 1})
+                tween:Play()
+                tween.Completed:Connect(function()
+                    clone:Destroy()
+                end)
+            end)
+        end
+
+        local rand = Random.new()
+
+        local function getXAndZPositions(angle)
+            local x = math.cos(angle) * rand:NextInteger(2, 3)
+            local z = math.sin(angle) * rand:NextInteger(2, 3)
+            return x, z
+        end
+
+        for i, part in pairs(parts) do
+            local angle = i * (2 * math.pi / #parts)
+            local x, z = getXAndZPositions(angle)
+
+            local position = (Torso.CFrame * CFrame.new(x, rand:NextInteger(2, 3), z)).p
+            local lookAt = Torso.Position
+
+            part.CFrame = CFrame.new(position, lookAt)
+            part.BodyVelocity.Velocity = (CFrame.new(part.CFrame.LookVector.X*8,part.CFrame.LookVector.Y*2,part.CFrame.LookVector.Z*8)):Inverse().Position
+        end
+    end,
+    ["Phantom"] = function(Character)
+            for i, y in pairs(Character:GetChildren()) do
+            if y:IsA("BasePart") then
+                y.Anchored = true
+                y.CanCollide = false
+            end
+            if y:IsA("Tool") then
+                y:Destroy()
+            end
+            if y:IsA("Accessory") then
+                y:Destroy()
+            end
+            if y.Name == "Head" then
+                if y:FindFirstChild("Face") then
+                    y.Face:Destroy()
+                end
+                if y:FindFirstChild("face") then
+                    y.face:Destroy()
+                end
+            end
+            if y:IsA("BasePart") then
+                coroutine.resume(coroutine.create(function()
+                    wait(0.125)
+                    y.Transparency = 1
+                end))
+            end
+        end
+
+        for i, v in pairs(Character:GetChildren()) do
+            if v:IsA("BasePart") then
+                spawn(function()
+                    local eff = table2.get("phantomstudio")
+                    eff.Parent = v
+                    eff.Position = v.Position
+
+                    for y, z in pairs(eff:GetChildren()) do
+                        coroutine.resume(coroutine.create(function()
+                            z.Enabled = true
+                            z:Emit(64)
+                            wait(0.5)
+                            z.Enabled = false
+                            wait(2)
+                            eff:Destroy()
+                        end))
+                    end
+                end)
+            end
+        end
+    end,
+    ["Cosmic"] = function(Character)
+        local Torso = Character:FindFirstChild("Torso") or Character:WaitForChild("Torso")
+        local eff = table2.get("cosmic")
+        eff.Parent = Torso
+        eff.Position = Torso.Position
+
+        for i, z in pairs(Character:GetChildren()) do
+            if z:IsA("Accessory") then
+                z:Destroy()
+            end
+            if z.Name == "Head" then
+                if z:FindFirstChild("Face") then
+                    z.Face:Destroy()
+                end
+                if z:FindFirstChild("face") then
+                    z.face:Destroy()
+                end
+            end
+            if z:IsA("BasePart") then
+                coroutine.resume(coroutine.create(function()
+                    wait(0.125)
+                    z.Transparency = 1
+                end))
+            end
+        end
+        for i, v in pairs(eff:GetChildren()) do
+            coroutine.resume(coroutine.create(function()
+                v.Enabled = true
+                v:Emit(32)
+                wait(0.25)
+                v.Enabled = false
+                wait(2)
+                eff:Destroy()
+            end))
+        end
+    end,
+    ["Retro"] = function(Character)
+        for i, y in pairs(Character:GetChildren()) do
+            if y:IsA("Tool") then
+                y:Destroy()
+            end
+        end
+        local Fire = table2.get("retrofx")
+        Fire.Parent = Character:FindFirstChild("Head") or Character:WaitForChild("Head")
+        wait(1)
+        Fire:Destroy()
+    end,
+    ["Aureus"] = function(Character)
+        for i, v in pairs(Character:GetChildren()) do
+            if v:IsA("BasePart") and v.Name ~= "HumanoidRootPart" then
+                v.BrickColor = BrickColor.new("Gold")
+                local dec1 = Instance.new("Decal", v)
+                dec1.Face = Enum.NormalId.Front
+                dec1.Texture = "rbxassetid://2659059555"
+                local dec2 = Instance.new("Decal", v)
+                dec2.Face = Enum.NormalId.Back
+                dec2.Texture = "rbxassetid://2659059555"
+                local dec3 = Instance.new("Decal", v)
+                dec3.Face = Enum.NormalId.Top
+                dec3.Texture = "rbxassetid://2659059555"
+                local dec4 = Instance.new("Decal", v)
+                dec4.Face = Enum.NormalId.Bottom
+                dec4.Texture = "rbxassetid://2659059555"
+                local dec5 = Instance.new("Decal", v)
+                dec5.Face = Enum.NormalId.Left
+                dec5.Texture = "rbxassetid://2659059555"
+                local dec6 = Instance.new("Decal", v)
+                dec6.Face = Enum.NormalId.Right
+                dec6.Texture = "rbxassetid://2659059555"
+                local Weld = Instance.new("WeldConstraint")
+                Weld.Part0 = v
+                Weld.Part1 = Character:FindFirstChild("HumanoidRootPart")
+            end
+            if v:IsA("Accessory") then
+                v.Handle:FindFirstChildWhichIsA("SpecialMesh").TextureId = "rbxassetid://2659059555"
+            end
+            if v:IsA("Tool") or v:IsA("Shirt") or v:IsA("Pants") or v:IsA("ShirtGraphic") then
+                v:Destroy()
+            end
+        end
+    end,
 }
 
 function KillEffect(Character,SkinName) 
