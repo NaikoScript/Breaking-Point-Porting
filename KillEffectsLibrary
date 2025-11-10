@@ -1,0 +1,145 @@
+-- Early test of kill effects library for PPPORTING --
+local table2 = {}
+local game_GetService = game.GetService
+local game_WaitForChild = game.WaitForChild
+local game_FindFirstChild = game.FindFirstChild
+local v2 = game_GetService(game, "ReplicatedStorage") 
+local u22 = game_WaitForChild(v2, "model")
+local workspace_CurrentCamera = workspace.CurrentCamera
+local TweenService = game:GetService("TweenService")
+function table2.get(p71) 
+	return u22[p71]:Clone()
+end
+local function tween2(p2, p3, p4, p5, p6, p7)
+	local table22 = {}
+	table22[p3] = p4
+	TweenService:Create(p2, TweenInfo.new(p5, p6 or Enum.EasingStyle.Quint, p7 or Enum.EasingDirection.Out), table22):Play()
+end
+
+
+
+
+local Effects = {
+    ["Pink Cosmic"] = function(Character)
+    local t_p = workspace_CurrentCamera.CFrame.p
+	local vec3 = Vector3.new(t_p.X, Character.Torso.Position.Y + 1.3, t_p.Z)
+	local cf2 = CFrame.new(Character.Torso.Position + Vector3.new(0, 1.3, 0), vec3)
+	for _, Part in pairs(Character:GetChildren()) do
+		if Part:IsA("BasePart") then
+			tween2(Part, "Size", Vector3.new(0.1, 0.1, 0.1), 0.6)
+			if Part.Name == "HumanoidRootPart" then continue end
+			tween2(Part, "Transparency", 1, 1)
+			tween2(Part, "CFrame", (Character.Torso.CFrame + Vector3.new(0, 1.3, 0)) * CFrame.Angles(math.rad((math.random(-360, 360))), math.rad((math.random(-360, 360))), (math.rad((math.random(-360, 360))))), 0.6, nil, nil)
+			continue
+		end
+		if not Part:IsA("Accessory") then continue end
+		tween2(Part.Handle, "Transparency", 1, 1)
+		tween2(Part.Handle:FindFirstChild("Mesh") or Part.Handle:FindFirstChild("SpecialMesh"), "Scale", Vector3.new(0.1, 0.1, 0.1), 0.6)
+		tween2(Part.Handle, "CFrame", (Character.Torso.CFrame + Vector3.new(0, 1.3, 0)) * CFrame.Angles(math.rad((math.random(-360, 360))), math.rad((math.random(-360, 360))), (math.rad((math.random(-360, 360))))), 0.6, nil, nil)
+	end
+	delay(0.3, function() 
+
+		Character:Destroy()
+	end)
+	for i = 1, 1 do
+		local table25 = {}
+		for index28 = 3, 3 do
+			for index51 = -25, 25 do
+				local v197 = math.sin(index51) ^ 3 * 16
+				local v198 = math.cos(index51) * 13 - math.cos(index51 * 2) * 5 - math.cos(index51 * 3) * 2 - math.cos(index51 * 4)
+				local _ = v197 * 0.5
+				local _ = v198 * 0.5
+				local v199 = table2.get("cosmiclove")
+				v199.CFrame = cf2
+				v199.Parent = workspace
+				table25[#table25 + 1] = v199
+			end
+		end
+		local u122 = table2.get("heart")
+		u122.CFrame = CFrame.new(20, 24.5, 0)
+		u122.Parent = workspace
+		u122.Size = Vector3.new(0.1, 0.1, 0.1)
+		delay(0, function() 
+			tween2(u122, "Size", Vector3.new(7.989, 7.536, 0.31679999999999997), 1)
+		end)
+		for key93, val93 in pairs(table25) do
+			local v151 = math.sin(key93) ^ 3 * 16
+			local v152 = math.cos(key93) * 13 - math.cos(key93 * 2) * 5 - math.cos(key93 * 3) * 2 - math.cos(key93 * 4)
+			local v153 = (math.floor(key93 / 50) + 1) * 3
+			local v154 = cf2 * CFrame.new(v151 * 0.5 / v153, v152 * 0.5 / v153, 0)
+			tween2(val93, "CFrame", v154, 0.5)
+			val93.ParticleEmitter.Acceleration = (cf2.p - v154.p).unit * 70
+			for _, Part7 in pairs(val93:GetChildren()) do
+				if not Part7:IsA("ParticleEmitter") then continue end
+				if Part7.Name ~= "spark" then
+					Part7:Emit()
+					continue
+				end
+				if key93 % 25 ~= 0 then continue end
+				Part7:Emit()
+			end
+			delay(0.9, function() 
+				val93.Trail:Destroy()
+			end)
+			delay(key93 * 1 / 120 + 0.3, function() 
+				if key93 == 3 then
+					tween2(u122, "Size", Vector3.new(0.1, 0.1, 0.1), 1, nil, Enum.EasingDirection.InOut)
+					tween2(u122, "Transparency", 1, 1)
+					delay(1, function()
+						u122:Destroy()
+					end)
+				end
+				tween2(val93, "CFrame", cf2, 0.6, nil, Enum.EasingDirection.InOut)
+				wait(3)
+				val93:Destroy()
+			end)
+		end
+	end
+end,
+    ["Radiant"] = function(Character)
+        if not Character.Parent then return end
+        local u92 = table2.get("radiant2")
+        pcall(function()
+            local u148 = CFrame.new(Character.Torso.Position.X, 0, Character.Torso.Position.Z) * CFrame.Angles(0, 0, 1.5707963267948966)
+            u92.CFrame = CFrame.new(Character.Torso.Position.X, 0, Character.Torso.Position.Z) * CFrame.Angles(0, 0, 1.5707963267948966)
+            u92.Parent = workspace.ignore__
+            u92.ParticleEmitter:Emit()
+            tween2(u92, "Transparency", 0, 0.3)
+            tween2(u92, "Size", Vector3.new(30, 5, 5), 1)
+            tween2(u92, "CFrame", CFrame.new(Character.Torso.Position.X, 15, Character.Torso.Position.Z) * CFrame.Angles(0, 0, 1.5707963267948966), 1)
+            for index39 = 0, 360, 180 do
+                delay(index39 / 180 * 0.1, function()
+                    local u185 = table2.get("radtrail")
+                    u185.CFrame = CFrame.new(u148.p) * CFrame.Angles(0, math.rad(index39), 0) * CFrame.new(0.4, index39 / 180 * 3 + 0, 0)
+                    u185.Parent = workspace.ignore__
+                    for _, child200 in pairs(u185:GetChildren()) do
+                        if child200.Name ~= "Trail" then continue end
+                        child200.Enabled = true
+                    end
+                    tween2(u185, "CFrame", u185.CFrame * CFrame.new(0, 10, 0), 1)
+                    delay(1, function()
+                        u185:Destroy()
+                    end)
+                end)
+            end
+	    end)
+        wait(0.2)
+        tween2(u92, "CFrame", CFrame.new(Character.Torso.Position.X, 10, Character.Torso.Position.Z) * CFrame.Angles(0, 0, 1.5707963267948966), 0.75)
+        if Character.Parent then
+            Character:Destroy()
+        end
+        tween2(u92, "Size", Vector3.new(30, 0, 0), 0.2, nil, Enum.EasingDirection.InOut)
+        tween2(u92, "Transparency", 1, 0.5)
+        wait(1)
+        u92:Destroy()
+    end
+}
+
+function KillEffect(Character,SkinName) 
+    local EffectFunction = Effects[SkinName]
+    if EffectFunction then
+        EffectFunction(Character)
+    end
+end
+
+return KillEffect
