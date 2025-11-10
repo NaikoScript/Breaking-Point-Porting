@@ -63,7 +63,8 @@ if UI.inv.sectionframes:GetChildren()[SkinType]:FindFirstChild("GridOrder") then
             if workspace:FindFirstChild("deadbodies") then
                 local DeadBodies = workspace:FindFirstChild("deadbodies")
                 DeadBodies.ChildAdded:Connect(function(DeadBody)
-                    task.wait()
+                    task.wait(0.008)
+                    if SkinWrap ~= true then return end
                     if (SkinType == 1 and workspace.gunholder:FindFirstChild(LocalPlayer.Name)) or (SkinType == 2 and (LocalPlayer.Character:FindFirstChild("Blade") or LocalPlayer.Backpack:FindFirstChild("Blade"))) then
                         KillEffectLib(DeadBody,SkinName)
                     end
