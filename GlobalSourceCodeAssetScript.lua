@@ -204,6 +204,7 @@ if UI.inv.sectionframes:GetChildren()[SkinType]:FindFirstChild("GridOrder") then
         end
     end)
     invbut.Parent = UI.inv.sectionframes:GetChildren()[SkinType]
+    UI.inv.sectionframes:GetChildren()[SkinType]:FindFirstChild("TextLabel").Visible = false
     invbut.MouseButton1Down:Connect(function()
         if invbut.BorderSizePixel == 0 then
             invbut.BorderSizePixel = 2
